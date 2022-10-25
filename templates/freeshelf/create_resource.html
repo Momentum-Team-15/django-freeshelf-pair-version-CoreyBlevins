@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block content %}
+<a href="{% url 'home' %}">Home</a>
+
+<h2>Add Resource</h2>
+<form method="post">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+
+{% endblock %}

@@ -24,5 +24,8 @@ urlpatterns = [
     path('', views.index, name="home"),
     path('accounts/logout/', views.logout, name="logout"),
     path('accounts/login/', views.login, name="login"),
+    path('resource/<int:pk>', views.resource_detail, name='resource_detail'),
+    path('resource/<int:pk>/edit', views.edit_resources, name='edit_resource'),
+    path('resource/new', views.create_resource, name='create_resource')
 ]
  
