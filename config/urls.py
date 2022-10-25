@@ -22,4 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('', views.index, name="home"),
+    path('accounts/logout/', views.logout, name="logout"),
+    path('accounts/login/', views.login, name="login"),
 ]
+ 
