@@ -6,12 +6,14 @@ from freeshelf.forms import ResourceForm
 
 @login_required
 def index(request):
-    resources = Resources.objects.all()
+    resources = Resources.objects.all().order_by('-created_date')
     return render(request, 'freeshelf/index.html', {'resources': resources})
+
 
 def resource_detail(request, pk):
     resource = Resources.objects.get(pk=pk)
     return render(request, 'freeshelf/resource_detail.html', {'resource': resource})
+
 
 def edit_resources(request, pk):
     edit = get_object_or_404(Resources, pk=pk)
@@ -24,6 +26,15 @@ def edit_resources(request, pk):
     else:
         form = ResourceForm(instance=edit)
     return render(request, 'freeshelf/edit_resource.html', {'form': form})
+
+
+def delete_resource(request, pk):
+    edit = get_object_or_404(Resources, pk=pk)
+    if request.method == 'POST':
+        edit.delete()
+        return redirect("home")
+    return render(request, 'freeshelf/delete_resource.html')
+
 
 def create_resource(request):
     if request.method == 'POST':
@@ -39,7 +50,6 @@ def create_resource(request):
 def login(request):
     return render(request, 'accounts/login/')
 
+
 def logout(request):
     return render(request, 'accounts/logout/')
-
-
