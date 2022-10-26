@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>TEST HOME</h2>
+<h2>HOME</h2>
+<a href="{% url 'favorite_page' %}">Favorites</a>
 <a href="{% url 'logout' %}">Log Out</a>
 <br>
 <br>
-{% if user.is_authenticated %}
-<a class="" href="{% url 'create_resource' %}">create_resource</a>
 
+{% if user.is_staff %}
+<a class="" href="{% url 'create_resource' %}">Add</a>
 {% endif %}
 
 {{ user.name }}
@@ -23,6 +24,10 @@
 <p>{{ resource.author }}</p>
 <a href="{{ resource.url }}">link</a>
 <p>{{ resource.description }}</p>
+
+<a href="{% url 'favorite' res_pk=resource.pk %}">Favorite</a>
+
+
 <p>{{ resource.created_date }}</p>
 {% endfor %}
 

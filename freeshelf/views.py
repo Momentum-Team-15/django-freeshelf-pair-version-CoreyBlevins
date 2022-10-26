@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Resource, Category
+from .models import Resource, Category, Favorite
 from freeshelf.forms import ResourceForm
 
 
@@ -11,15 +11,38 @@ def index(request):
     return render(request, 'freeshelf/index.html', {'resources': resources, 'categories': categories})
 
 
+def add_favorite(request, res_pk):
+    resource = get_object_or_404(Resource, pk=res_pk)
+    unfavorited = False
+    for favorite in request.user.favorites.all():
+        if resource == favorite.resource:
+            favorite.delete()
+            unfavorited = True
+    if not unfavorited:
+        favorite = Favorite.objects.create(resource=resource, user=request.user)
+        favorite.save()
+    return redirect("home")
+
+
+def favorite(request):
+    favorited = Favorite.objects.all().order_by('-created_at')
+    return render(request, 'freeshelf/favorites.html', {'favorited': favorited})
+
+
 def resource_detail(request, pk):
     resource = Resource.objects.get(pk=pk)
     return render(request, 'freeshelf/resource_detail.html', {'resource': resource})
 
 
+def category(request, slug):
+    category = Category.objects.get(slug=slug)
+    return render(request, 'freeshelf/resource_categories.html', {'category': category})
+
+
 def edit_resources(request, pk):
     edit = get_object_or_404(Resource, pk=pk)
     if request.method == "POST":
-        form = ResourceForm(request.POST, request.FILES, instance=edit)
+        form = ResourceForm(request.POST, instance=edit)
         if form.is_valid():
             edit = form.save(commit=False)
             edit.save()
@@ -46,11 +69,6 @@ def create_resource(request):
     else:
         form = ResourceForm()
     return render(request, 'freeshelf/create_resource.html', {'form': form})
-
-
-def category(request, slug):
-    category = Category.objects.get(slug=slug)
-    return render(request, 'freeshelf/resource_categories.html', {'category': category})
 
 
 def login(request):

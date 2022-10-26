@@ -10,9 +10,11 @@
     <p>{{ resource.created_date }}</p>
 </div>
 
+{% if user.is_staff %}
 <div class="">
 <a class="" href="{% url 'edit_resource' pk=resource.pk %}">Edit</a>
 <a class="" href="{% url 'delete_resource' pk=resource.pk %}">Delete</a>
+{% endif %}
 
 </div>
 {% endblock %}

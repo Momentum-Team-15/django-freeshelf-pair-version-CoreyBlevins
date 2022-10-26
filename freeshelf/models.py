@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
-
 class User(AbstractUser):
     name = models.CharField(max_length=30, null=True, blank=True)
 
@@ -26,3 +25,9 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.title}"
     
+
+class Favorite(models.Model):
+    resource = models.ForeignKey('Resource', on_delete=models.CASCADE, blank=True, null=True, related_name="favorites")
+    user = models.ForeignKey('User', on_delete=models.CASCADE, blank=True, null=True, related_name="favorites")
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+

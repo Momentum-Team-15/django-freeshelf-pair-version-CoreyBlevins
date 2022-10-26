@@ -29,4 +29,6 @@ urlpatterns = [
     path('resource/new', views.create_resource, name='create_resource'),
     path('resource/<int:pk>/delete', views.delete_resource, name='delete_resource'),
     path('resource/<slug:slug>/', views.category, name='resource_categories'),
+    path('favorites/new/<int:res_pk>', views.add_favorite, name='favorite'),
+    path('favorites/', views.favorite, name='favorite_page')
 ]
