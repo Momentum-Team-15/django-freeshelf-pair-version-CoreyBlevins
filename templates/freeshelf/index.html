@@ -11,9 +11,13 @@
 {% endif %}
 
 {{ user.name }}
+<h2>Categories:</h2>
+{% for cat in categories %}
+<a href="{% url 'resource_categories' slug=cat.slug %}">{{ cat.title }}</a>
+{% endfor %}
 <br>
 <br>
-
+<h2>Resources:</h2>
 {% for resource in resources %}
 <a href="{% url 'resource_detail' pk=resource.pk %}">{{ resource.title }}</a>
 <p>{{ resource.author }}</p>

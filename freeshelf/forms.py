@@ -1,9 +1,8 @@
 from django import forms
-from .models import Resources
+from .models import Resource
 
 class ResourceForm(forms.ModelForm):
-
     class Meta:
-        model = Resources
+        model = Resource
         fields = ('title', 'author', 'url', 'description',)
 
