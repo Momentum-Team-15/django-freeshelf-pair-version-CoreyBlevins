@@ -8,7 +8,8 @@ from freeshelf.forms import ResourceForm
 def index(request):
     resources = Resource.objects.all().order_by('-created_date')
     categories = Category.objects.all()
-    return render(request, 'freeshelf/index.html', {'resources': resources, 'categories': categories})
+    starred = Favorite.objects.all()
+    return render(request, 'freeshelf/index.html', {'resources': resources, 'categories': categories, 'starred': starred})
 
 
 def add_favorite(request, res_pk):

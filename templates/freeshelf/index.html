@@ -9,13 +9,15 @@
 <br>
 
 {% if user.is_staff %}
-<a class="" href="{% url 'create_resource' %}">Add</a>
+<div id="add">
+<a class="options" href="{% url 'create_resource' %}">Add a resource</a>
+</div>
 {% endif %}
 
 
 <h2>Categories:</h2>
 {% for cat in categories %}
-<a href="{% url 'resource_categories' slug=cat.slug %}">{{ cat.title }}</a>
+<a class="options" href="{% url 'resource_categories' slug=cat.slug %}">{{ cat.title }}</a>
 {% endfor %}
 <br>
 <br>
@@ -30,9 +32,9 @@
     {% endif %}
     <h2 class="resource-box"><a class="resource-box title-color" href="{% url 'resource_detail' pk=resource.pk %}">{{ resource.title }}</a></h2>
     <p class="resource-box">{{ resource.author }}</p>
-    <a class="resource-box" href="{{ resource.url }}">link</a>
+    <a class="resource-box" href="{{ resource.url }}">Link to website</a>
     <p class="resource-box">{{ resource.description }}</p>
-    <a class="resource-box" href="{% url 'favorite' res_pk=resource.pk %}">Favorite</a>
+    <a class="resource-box" href="{% url 'favorite' res_pk=resource.pk %}">Favorite this book</a>
     <p class="resource-box">{{ resource.created_date }}</p>
 </div>
 {% endfor %}

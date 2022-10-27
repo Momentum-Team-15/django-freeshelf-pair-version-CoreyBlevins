@@ -4,7 +4,7 @@
 
 {% for fav in favorited %}
 <div>
-    {% if resource.cover %}
+    {% if fav.resource.cover %}
     <img  src="{{ fav.resource.cover.url }}">
     {% else %}
     <p>No cover provided</p>
