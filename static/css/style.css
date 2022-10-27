@@ -1,4 +1,41 @@
 *{
     box-sizing: border-box;
+    background: #fefae0;
+}
+#header,
+#header h2 a:visited {
+    text-align: center;
+    background: #ccd5ae;
+    color: white;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+#header-title {
+    background: #ccd5ae;
+}
+#option-box {
+    display: flex;
+    align-items: center;
+    float: right;
+}
+.options {
+    border: 1px solid #fefae0;
+    color: white;
+    background: #ccd5ae;
+    padding: 10px;
+    margin: 5px;
+}
+#resources {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+#resource-container {
+    border: 1px solid #d4a373;
     margin: 10px;
+}
+.resource-box{
+
+    background-color: #faedcd;
+    padding-left: 3px;
+    
 }

@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<h2>HOME</h2>
-<a href="{% url 'favorite_page' %}">Favorites</a>
-<a href="{% url 'logout' %}">Log Out</a>
+<div id="option-box">
+    <p>Hello, {{ user.name }}</p>
+    <a class="options" href="{% url 'favorite_page' %}">Favorites</a>
+    <a class="options" href="{% url 'logout' %}">Log Out</a>
+</div>
 <br>
 <br>
 
@@ -11,7 +12,7 @@
 <a class="" href="{% url 'create_resource' %}">Add</a>
 {% endif %}
 
-{{ user.name }}
+
 <h2>Categories:</h2>
 {% for cat in categories %}
 <a href="{% url 'resource_categories' slug=cat.slug %}">{{ cat.title }}</a>
@@ -19,17 +20,17 @@
 <br>
 <br>
 <h2>Resources:</h2>
+<div id="resources">
 {% for resource in resources %}
-<a href="{% url 'resource_detail' pk=resource.pk %}">{{ resource.title }}</a>
-<p>{{ resource.author }}</p>
-<a href="{{ resource.url }}">link</a>
-<p>{{ resource.description }}</p>
-
-<a href="{% url 'favorite' res_pk=resource.pk %}">Favorite</a>
-
-
-<p>{{ resource.created_date }}</p>
+<div id="resource-container" class="resource-box">
+    <h2 class="resource-box"><a class="resource-box" href="{% url 'resource_detail' pk=resource.pk %}">{{ resource.title }}</a></h2>
+    <p class="resource-box">{{ resource.author }}</p>
+    <a class="resource-box" href="{{ resource.url }}">link</a>
+    <p class="resource-box">{{ resource.description }}</p>
+    <a class="resource-box" href="{% url 'favorite' res_pk=resource.pk %}">Favorite</a>
+    <p class="resource-box">{{ resource.created_date }}</p>
+</div>
 {% endfor %}
-
+</div>
 
 {% endblock %}
