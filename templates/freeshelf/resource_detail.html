@@ -3,6 +3,11 @@
 {% block content %}
 
 <div id="">
+    {% if resource.cover %}
+    <img src="{{ resource.cover.url }}">
+    {% else %}
+    <p>No cover provided</p>
+    {% endif %}
     <p>{{ resource.title }}</p>
     <p>{{ resource.author }}</p>
     <a href="{{ resource.url }}">link</a>

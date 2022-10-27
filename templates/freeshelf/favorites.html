@@ -4,6 +4,11 @@
 
 {% for fav in favorited %}
 <div>
+    {% if resource.cover %}
+    <img  src="{{ fav.resource.cover.url }}">
+    {% else %}
+    <p>No cover provided</p>
+    {% endif %}
     <p>{{ fav.resource.title }}</p>
     <p>{{ fav.resource.author }}</p>
     <a href="{{ fav.resource.url }}">link</a>

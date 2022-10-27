@@ -13,6 +13,7 @@ class Resource(models.Model):
     description = models.TextField(null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE, blank=True, null=True, related_name="resources")
+    cover = models.ImageField(upload_to='images', null=True, blank=True)
 
     def __str__(self):
         return f"{self.title} by {self.author}"

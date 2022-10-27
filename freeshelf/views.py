@@ -42,7 +42,7 @@ def category(request, slug):
 def edit_resources(request, pk):
     edit = get_object_or_404(Resource, pk=pk)
     if request.method == "POST":
-        form = ResourceForm(request.POST, instance=edit)
+        form = ResourceForm(request.POST, request.FILES, instance=edit)
         if form.is_valid():
             edit = form.save(commit=False)
             edit.save()
@@ -77,3 +77,15 @@ def login(request):
 
 def logout(request):
     return render(request, 'accounts/logout/')
+
+
+def image_upload(request):
+    if request.method == 'POST':
+        form = ResourceForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            img_obj = form.instance
+            return render(request, 'index.html', {'form': form, 'img_obj': img_obj})
+    else:
+        form = ResourceForm()
+    return render(request, 'index.html', {'form': form})

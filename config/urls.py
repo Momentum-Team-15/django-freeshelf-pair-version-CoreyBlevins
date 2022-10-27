@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from freeshelf import views
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,5 +31,9 @@ urlpatterns = [
     path('resource/<int:pk>/delete', views.delete_resource, name='delete_resource'),
     path('resource/<slug:slug>/', views.category, name='resource_categories'),
     path('favorites/new/<int:res_pk>', views.add_favorite, name='favorite'),
-    path('favorites/', views.favorite, name='favorite_page')
+    path('favorites/', views.favorite, name='favorite_page'),
+    path('upload/', views.image_upload, name='image_uplaod')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,7 +5,8 @@
 <a href="{% url 'home' %}">Home</a>
 <h2>Edit:</h2>
 
-<form method="POST">{% csrf_token %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
 </form>

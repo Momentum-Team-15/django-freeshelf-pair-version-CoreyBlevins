@@ -6,6 +6,11 @@
 <h2>{{ category.title }}</h2>
 
 {% for resource in category.resources.all %}
+{% if resource.cover %}
+<img src="{{ resource.cover.url }}">
+{% else %}
+<p>No cover provided</p>
+{% endif %}
 <p>{{ resource.title }}</p>
 <p>{{ resource.author }}</p>
 <a href="{{ resource.url }}">link</a>

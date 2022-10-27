@@ -23,7 +23,12 @@
 <div id="resources">
 {% for resource in resources %}
 <div id="resource-container" class="resource-box">
-    <h2 class="resource-box"><a class="resource-box" href="{% url 'resource_detail' pk=resource.pk %}">{{ resource.title }}</a></h2>
+    {% if resource.cover %}
+    <img class="covers" src="{{ resource.cover.url }}">
+    {% else %}
+    <p class="resource-box">No cover provided</p>
+    {% endif %}
+    <h2 class="resource-box"><a class="resource-box title-color" href="{% url 'resource_detail' pk=resource.pk %}">{{ resource.title }}</a></h2>
     <p class="resource-box">{{ resource.author }}</p>
     <a class="resource-box" href="{{ resource.url }}">link</a>
     <p class="resource-box">{{ resource.description }}</p>

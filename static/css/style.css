@@ -37,5 +37,11 @@
 
     background-color: #faedcd;
     padding-left: 3px;
+}
+.title-color {
+    color: black;
+}
+.covers {
+    width: 300px;
     
 }
